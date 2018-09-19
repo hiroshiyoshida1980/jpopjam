@@ -9,11 +9,31 @@
       "**/.*",
       "**/node_modules/**"
     ],
+
+    "headers": [
+      {
+        "source": "**/upload",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      }
+    ],
+    
     "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
       }
     ]
+  },
+  "firestore": {
+    "rules": "y",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

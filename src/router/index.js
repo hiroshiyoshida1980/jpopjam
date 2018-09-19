@@ -4,7 +4,9 @@ import HelloWorld from '@/components/HelloWorld'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 import List from '@/components/list'
-
+import Listcon from '@/components/listcon'
+import Person from '@/components/person'
+import Tunes from '@/components/tunes'
 
 import firebase from 'firebase'
 
@@ -17,6 +19,7 @@ let router = new Router({
       redirect: 'signin'
     },
     
+
     {
       path: '/',
       name: 'HelloWorld',
@@ -33,6 +36,29 @@ let router = new Router({
 
     },
 
+    {
+      path: '/person',
+      name: 'Person',
+      component: Person,
+      meta: { requiresAuth: true }
+
+    },
+
+    {
+      path: '/tunes',
+      name: 'Tunes',
+      component: Tunes,
+      meta: { requiresAuth: true }
+
+    },
+
+    {
+      path: '/listcon',
+      name: 'Listcon',
+      component: Listcon,
+      meta: { requiresAuth: true }
+
+    },
 
 
     {
@@ -69,3 +95,6 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
+
+
+

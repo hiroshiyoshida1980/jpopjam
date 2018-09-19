@@ -4,18 +4,33 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'vue-croppa/dist/vue-croppa.css'
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
 
+Vue.use(Buefy)
 
+import Croppa from 'vue-croppa'
+
+ Vue.use(Croppa) 
+ 
+import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fa-brands.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fa-regular.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
+ 
+Vue.use(VueSweetalert2);
 Vue.config.productionTip = false
 
-const config = {
-  apiKey: "AIzaSyBNXYclFZtfW_hEH-YXvCCFQiloUq-GHDM",
-    authDomain: "fire-vue-fa684.firebaseapp.com",
-    databaseURL: "https://fire-vue-fa684.firebaseio.com",
-    projectId: "fire-vue-fa684",
-    storageBucket: "fire-vue-fa684.appspot.com",
-    messagingSenderId: "710639443348"
-}
+var config = {
+  apiKey: "AIzaSyDnf1eiO5vB9uwQGYoPCUfapi_6KVY13qk",
+  authDomain: "jpopjam0813.firebaseapp.com",
+  databaseURL: "https://jpopjam0813.firebaseio.com",
+  projectId: "jpopjam0813",
+  storageBucket: "jpopjam0813.appspot.com",
+  messagingSenderId: "846963922708"
+};
 firebase.initializeApp(config)
 
 /* eslint-disable no-new */
