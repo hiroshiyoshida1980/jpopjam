@@ -16,19 +16,25 @@
               <p>みなさんが主役のイベントです。互いへのリスペクトを忘れず、マナーを守って一緒に楽しいイベントを作りましょう！</p>
               <p>その他不明点もお気軽にお問い合わせください。</p> 
    </h5>
-
+{{stageselecter}}
 <div style="height:20px;"></div> 
 <h6 class="is-size-5">NEW ENTRY</h6> 
-<div style="height:30px;"></div>   
-
+<div style="height:10px;"></div>   
+                    <multiselect v-model="selectedStage" deselect-label="ステージを選んでください。" 
+                        placeholder="ステージを選ぶ。" :options="stage" :searchable="true" :allow-empty="false" :show-labels="false">
+                    </multiselect>
+<div style="height:10px;"></div> 
                     <multiselect v-model="selectedParts" deselect-label="パートを選んでください。" 
-                        placeholder="パートを選ぶ。" :options="parts" :searchable="true"  :show-labels="false">
+                        placeholder="パートを選ぶ。" :options="parts" :searchable="true" :allow-empty="false" :show-labels="false">
                     </multiselect>
 <div style="height:10px;"></div> 
                     <multiselect v-model="selectedTunes" deselect-label="曲を選んでください。" 
-                        placeholder="曲を選ぶ。" :options="tunes" :searchable="true" :show-labels="false">
+                        placeholder="曲を選ぶ。" :options="tunes" :searchable="true" :allow-empty="false" :show-labels="false">
                     </multiselect>
-
+<div style="height:10px;"></div> 
+                    <multiselect v-model="selectedKeys" deselect-label="キーを選んでください" 
+                        placeholder="キーを選ぶ。" :options="keys" :searchable="true" :allow-empty="false" :show-labels="false">
+                    </multiselect>
 
 <div style="height:20px;"></div>
 
@@ -99,14 +105,14 @@ export default {
 　    selectedSession: [],
       stageselecter: "Band",
       entrylist:[],
-     // stage: ["お任せ(推奨)","Band","Aco"],
+      stage: ["お任せ(推奨)","Band","Aco"],
 
       parts: ["Vo","Gt","Ba","Dr","Kb"
       ,"Per","cho","Ins"],
 
-     // tunes: ["AM 11:00/HY","Automatic/宇多田ヒカル","Baby I Love You/TEE","Choo Choo TRAIN/EXILE","Dragon Night/SEKAI NO OWARI","Everything/MISIA","First Love/宇多田ヒカル","Get Wild/TM NETWORK","GLAMOROUS SKY/中嶋美嘉","HANABI/Mr.Children","I LOVE YOU/クリス・ハート","I LOVE YOU/尾崎豊","LA・LA・LA LOVE SONG/久保田利伸","LOVEマシーン/モーニング娘。","R.Y.U.S.E.I /三代目J Soul Brothers","STAY TUNE/Suchmos","STORY/AI","SWEET MEMORIES/松田聖子","ultra soul/B'z","WINDING ROAD/絢香×コブクロ","YAH YAH YAH/CHAGE and ASKA","愛をこめて花束を/SuperFly","糸/中島みゆき","打上花火/DAOKO","カブトムシ/AIKO","奏/スキマスイッチ","キセキ/Green","くちばしにチェリー/エゴラッピン","恋するフォーチュンクッキー/AKB48","恋/星野源","今夜はブギーバック/小沢健二 featuring スチャダラパー","残酷な天使のテーゼ/高橋洋子","接吻/ORIGINAL LOVE","そばかす/JUDY AND MARY","小さな恋のうた/モンゴル800","つつみ込むように.../MISIA ","天体観測/BUMP OF CHICKEN","何度でも/DREAMS COME TRUE","ハナミズキ/一青窈","ハピネス/AI","ひまわりの約束/秦基博","丸の内サディステック/椎名林檎","三日月/絢香","夜空ノムコウ/SMAP","ロビンソン/スピッツ"],
-　    tunes: ["CHALA HEAD CHALA/影山ヒロノブ","ペガサス幻想/MAKE UP","微笑みの爆弾/馬渡松子","残酷な天使のテーゼ/高橋祥子","Can Do/グランロデオ","イマジネーション/スパイエアー","EGNITE/藍井エイル","Catch the Moment/LiSA","Brave Shine/Aimer","世界が終わるまでは/WANDS","ようこそジャパリパークへ/けものフレンズ","Butter-fly/和田光司","アンバランスなKISSをして/高橋ひろ","ライオン/シェリル＆ランカ","打ち上げ花火/DAOKO 米津玄師","炎のキン肉マン/串田アキラ","君の知らない物語/supercell","君が好きだと叫びたい/BAAD","ゆずれない願い/田村直美","めざせポケモンマスター！/松本梨香","GETWILD/TM NETWORK"],
-     //keys: ["原キー","+6","+5","+4","+3","+2","+1","-1","-2","-3","-4","-5","-6"],
+      tunes: ["AM 11:00/HY","Automatic/宇多田ヒカル","Baby I Love You/TEE","Choo Choo TRAIN/EXILE","Dragon Night/SEKAI NO OWARI","Everything/MISIA","First Love/宇多田ヒカル","Get Wild/TM NETWORK","GLAMOROUS SKY/中嶋美嘉","HANABI/Mr.Children","I LOVE YOU/クリス・ハート","I LOVE YOU/尾崎豊","LA・LA・LA LOVE SONG/久保田利伸","LOVEマシーン/モーニング娘。","R.Y.U.S.E.I /三代目J Soul Brothers","STAY TUNE/Suchmos","STORY/AI","SWEET MEMORIES/松田聖子","ultra soul/B'z","WINDING ROAD/絢香×コブクロ","YAH YAH YAH/CHAGE and ASKA","愛をこめて花束を/SuperFly","糸/中島みゆき","打上花火/DAOKO","カブトムシ/AIKO","奏/スキマスイッチ","キセキ/Green","くちばしにチェリー/エゴラッピン","恋するフォーチュンクッキー/AKB48","恋/星野源","今夜はブギーバック/小沢健二 featuring スチャダラパー","残酷な天使のテーゼ/高橋洋子","接吻/ORIGINAL LOVE","そばかす/JUDY AND MARY","小さな恋のうた/モンゴル800","つつみ込むように.../MISIA ","天体観測/BUMP OF CHICKEN","何度でも/DREAMS COME TRUE","ハナミズキ/一青窈","ハピネス/AI","ひまわりの約束/秦基博","丸の内サディステック/椎名林檎","三日月/絢香","夜空ノムコウ/SMAP","ロビンソン/スピッツ"],
+　     //  tunes: ["CHALA HEAD CHALA/影山ヒロノブ","ペガサス幻想/MAKE UP","微笑みの爆弾/馬渡松子","残酷な天使のテーゼ/高橋祥子","Can Do/グランロデオ","イマジネーション/スパイエアー","EGNITE/藍井エイル","Catch the Moment/LiSA","Brave Shine/Aimer","世界が終わるまでは/WANDS","ようこそジャパリパークへ/けものフレンズ","Butter-fly/和田光司","アンバランスなKISSをして/高橋ひろ","ライオン/シェリル＆ランカ","打ち上げ花火/DAOKO 米津玄師","炎のキン肉マン/串田アキラ","君の知らない物語/supercell","君が好きだと叫びたい/BAAD","ゆずれない願い/田村直美","めざせポケモンマスター！/松本梨香","GETWILD/TM NETWORK"],
+     keys: ["原キー","+6","+5","+4","+3","+2","+1","-1","-2","-3","-4","-5","-6"],
       entune: "",
       Entnum:"",
       artistname: "",
@@ -184,9 +190,38 @@ created() {
             return 0;
 
             });
+          
+        var glist = slist.filter(function (element) {
+        return element.sessionStatus == "coming";
 
+         });
 
           this.forjoinlist = forjoinlist;
+                var bandlist = [];
+              var acolist = [];
+
+
+
+            bandlist = glist.filter(function (element1) {
+            return element1.stage === "Band";
+
+            });
+
+            acolist = glist.filter(function (element2) {
+            return element2.stage === "Aco";
+
+            });
+
+
+          if(bandlist.length > acolist.length){
+
+          this.stageselecter =  "Aco";
+
+            }else{
+
+          this.stageselecter =  "Band";
+
+            }
 
            }
         })
@@ -257,30 +292,37 @@ created() {
 
       var En = this.Entnum;
       var entryNumber = En+1;
-
-   
+     
+     if(this.selectedStage == "お任せ(推奨)"){
+      var selectedStage = this.stageselecter;
+     }else{
+       var selectedStage = this.selectedStage;
+     }
+      
+      var selectedKeys = this.selectedKeys;
       var selectedTunes = this.selectedTunes;
       var selectedParts = this.selectedParts;
-   
   
-
-if (selectedTunes == null || selectedParts == null) {
-    
+if ( selectedStage == null || selectedTunes == null || selectedParts == null || selectedKeys == null ) {
+    this.isButtonDisabled = false;
 
     alert("全てを選択してください")
 
   
 }else{
 
- if (confirm("この内容でエントリーしますか？\n"+selectedTunes+"\n"+selectedParts)){
-        firebase
+   if (confirm("この内容でエントリーしますか？\n\n"+selectedStage+"ステージ\n"+selectedTunes+" key"+selectedKeys+"\nパート "+selectedParts+ "\n ※ 一度エントリーすると基本変更はできません！\nどうしても変更の場合はスタッフまで。")){
+       
+       
+       firebase
         .database()
         .ref("entryBoard/"+ entryNumber)
         .set({
           playtimes: played,
-          meta: selectedTunes+"/"+selectedParts+"."+artistname,
+           meta: selectedTunes+"."+selectedKeys+"."+selectedStage+"."+selectedParts+"."+artistname,
           entrynumber: entryNumber,
-          entune:selectedTunes,
+          stage: selectedStage,
+          entune: selectedTunes+"."+selectedKeys,
           image: image,
           parts: selectedParts,
           artistuid:useruid,

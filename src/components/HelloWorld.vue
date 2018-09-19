@@ -35,7 +35,7 @@
 
 
   <div style="height:300px; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;">
-   <li class="is-size-6" v-for = "item in board"　style="list-style: none;">
+   <li class="is-size-6" v-for = 'item in board' style="list-style: none;">
   <a class="item-image"  @click="isImageModalActive = true"><img :src= item.image width="30" height="30"></a><B>  {{item.name}} : </B><a v-html="item.messege">{{item.messege}}</a>
   </li>
   </div>

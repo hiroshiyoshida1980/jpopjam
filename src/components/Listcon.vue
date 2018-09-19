@@ -506,7 +506,6 @@ firebase.database().ref("entryBoard/")
           apt: 0,
           played: 0,
           status: "",
-          image:"https://firebasestorage.googleapis.com/v0/b/jpopjam0813.appspot.com/o/user-circle-regular.svg?alt=media&token=3ccba9d4-2976-40cd-977d-687da4c2ef9c",
             
         });
 

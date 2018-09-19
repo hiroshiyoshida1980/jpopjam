@@ -231,7 +231,7 @@ firebase.auth().onAuthStateChanged(user => {
                      alert('upload完了')
                      }
 
-                     setTimeout(setimage(),4000);
+                     setTimeout(setimage(),7000);
                            
                            
 

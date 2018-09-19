@@ -1,6 +1,6 @@
 <template>
   <div class="signin">
- <!--<div style="height:10px;"></div>
+<div style="height:10px;"></div>
      <div class="field">
         <div class="control has-icons-left has-icons-right">
           <input v-model="username" class="input" type="email" placeholder="Email input">
@@ -25,7 +25,7 @@
 
       <router-link to="/signup"><B>はじめてですか？？</B>＞新規登録はこちら。</router-link>
 
-<div style="height:40px;"></div> -->
+<div style="height:40px;"></div> 
 <figure class="image is-3by2">
   <img src="../assets/40498866_2365495676810770_5434302028048236544_o.jpg">
 </figure>
