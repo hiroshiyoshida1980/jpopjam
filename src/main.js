@@ -8,7 +8,9 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import 'vue-croppa/dist/vue-croppa.css'
 import Buefy from 'buefy'
 import 'buefy/lib/buefy.css'
+import VueYoutube from 'vue-youtube'
 
+Vue.use(VueYoutube)
 Vue.use(Buefy)
 
 import Croppa from 'vue-croppa'

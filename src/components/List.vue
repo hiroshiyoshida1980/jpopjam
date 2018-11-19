@@ -16,9 +16,9 @@
               <p>みなさんが主役のイベントです。互いへのリスペクトを忘れず、マナーを守って一緒に楽しいイベントを作りましょう！</p>
               <p>その他不明点もお気軽にお問い合わせください。</p> 
    </h5>
-{{stageselecter}}
+
 <div style="height:20px;"></div> 
-<h6 class="is-size-5">NEW ENTRY</h6> 
+<h6 class="is-size-5">エントリー</h6> 
 <div style="height:10px;"></div>   
                     <multiselect v-model="selectedStage" deselect-label="ステージを選んでください。" 
                         placeholder="ステージを選ぶ。" :options="stage" :searchable="true" :allow-empty="false" :show-labels="false">
@@ -47,7 +47,7 @@
 
 <div style="height:30px;"></div>
 
-<h6 class="is-size-5"> JOIN </h6> 
+<h6 class="is-size-5"> ジョイン</h6> 
 <div style="height:10px;"></div>   
 
 <multiselect v-model="selectedSession" deselect-label="セッションを選んでください。" track-by="meta" label="meta"
@@ -67,14 +67,14 @@
 
 <div style="height:20px;"></div>
 
-<h6 class="is-size-7"><B>＜順番表＞</B></h6> 
+<h6 class="is-size-7"><B>
+ジョイン可能なセッションはこちら。<br>
+No.0はまだ順番が確定していないセッションで<router-link to="/listcon">す。</router-link></B></h6> 
 <div style="height:10px;"></div>
    <li class="is-size-7" v-for = "item in forjoinlist"　style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;">
   <a class="item-image"><img :src= item.image width="20" height="20"></a> <B>No.{{item.sessionOrder}}：</B> {{item.entune}} {{item.parts}}.{{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
   </a></li>
 
-
-No.0はまだ順番が確定していないセッションで<router-link to="/listcon">す。</router-link>
 
 
 </div>
@@ -184,19 +184,19 @@ created() {
             });
           
 
-          var forjoinlist = slist.sort(function(a, b) {
+          var flist = slist.sort(function(a, b) {
             if(a.sessionOrder>b.sessionOrder) return 1;
             if(a.sessionOrder<b.sessionOrder) return -1;
             return 0;
 
             });
           
-        var glist = slist.filter(function (element) {
+        var glist = flist.filter(function (element) {
         return element.sessionStatus == "coming";
 
          });
 
-          this.forjoinlist = forjoinlist;
+          this.forjoinlist = glist;
                 var bandlist = [];
               var acolist = [];
 
@@ -319,7 +319,7 @@ if ( selectedStage == null || selectedTunes == null || selectedParts == null || 
         .ref("entryBoard/"+ entryNumber)
         .set({
           playtimes: played,
-           meta: selectedTunes+"."+selectedKeys+"."+selectedStage+"."+selectedParts+"."+artistname,
+           meta: selectedTunes+"."+selectedKeys+"."+selectedParts+"."+artistname,
           entrynumber: entryNumber,
           stage: selectedStage,
           entune: selectedTunes+"."+selectedKeys,

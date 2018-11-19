@@ -18,12 +18,16 @@
           </span>
         </p>
       </div>
-
+  <div v-if="isLoading">
     <a class="button is-danger" @click="signIn" v-bind:disabled="isButtonDisabled1"><i class="fas fa-lock"></i> ログイン<a v-show = "isButtonDisabled1">中:しばらくお待ちください・・ </a></a>
+</div>
+<div v-else>
+  <a class="button is-danger is-loading">Loading</a>
+  </div>
 
 <div style="height:20px;"></div>
 
-      <router-link to="/signup"><B>はじめてですか？？</B>＞新規登録はこちら。</router-link>
+      <router-link to="/signup"><B>はじめてですか？？</B>＞新規登録エントリーはこちら。</router-link>
 
 <div style="height:40px;"></div> 
 <figure class="image is-3by2">
@@ -48,7 +52,7 @@
 <p class="title is-5">東京で一番POPな</BR>ジャムセッション。</p>
 
                 <h6>
-                2018/10/2
+                2018/12/6 (木)
                 オープン18:00  スタート18:30</BR></BR>
                 《プレイヤー価格》</BR></BR>
                 前売 / 2400円 ＋1drink(600円) </BR></BR>
@@ -74,7 +78,7 @@ Vo. Akitoshi-KamberLand (GUSH -The Groove Usher-)<br>
                 
                 <br>  <br>
                       <a href="https://www.facebook.com/events/1847609011994076/">詳細はfacebookページでも。</a>  <br> <br><h3>
-                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIdMcyp7xij0JVh36AFmY_Jl81TuZpsXd8ZUYO0OjMgsE3UQ/viewform?usp=sf_link">>予約はこちら</a>
+                      <a class="button is-danger is-large" href="https://docs.google.com/forms/d/e/1FAIpQLSdIdMcyp7xij0JVh36AFmY_Jl81TuZpsXd8ZUYO0OjMgsE3UQ/viewform?usp=sf_link">>予約はこちら</a>
                       <br> </h3>
                 </h6>
     </div>
@@ -110,11 +114,29 @@ AM 11:00/HY</BR>Automatic/宇多田ヒカル</BR>Baby I Love You/TEE</BR>Choo Ch
 [1500円+2ticket]の料金設定が出来ました！</BR>今までよりもお得に、</BR>
 UDLの美味しいお酒&お食事をお楽しみ下さい^^</BR></BR>・新いいねシステム改良中！</BR>
 →携帯端末から素敵なプレーヤーにいいねが出来る「新システム」を継続して改良中です。
-より一層リスナー&プレーヤーのワクワクを刺激する「エンターテイメントなセッション」へ！</BR></BR>
+より一層リスナー&プレーヤーのワクワクを刺激する「エンターテイメントなセッション」へ！</BR>
+新曲も追加。
+「ロマンスの神様」 広瀬香美
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/AgfUewgwPOw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+冬と言えばゲレンデ！？そんな世代のあなたに、カラオケでも絶対盛り上がるハイトーンなこの曲。音楽的には曲中で2回も転調するという、難しい曲ですが、どんなアレンジになるでしょうか！
+
+
+「白い恋人達 」桑田佳祐
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/gEX21myCfU8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+若い世代にも人気の冬の名バラード。男子としてはこの曲を素敵に歌い上げて女の子にアピールしたい？本当にいい曲なのでJ-POPバラードの教科書としてコピーしてみるのもおすすめですよ。
+
+「プレイバックPart2」山口百恵
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/4Cx8gyCcA7c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+歌謡曲が若い世代にも人気になっている昨今、アイドルの歴史の中でも伝説と言える存在、山口百恵の曲が初めて入りました！キメも多いのでまたこれ盛り上がりそうですねー！だれかバチバチに決めてかっこよく歌ってください！
+</BR>
 </BR></BR>
 ■実は歌に自信があるのに、一人でカラオケに行くだけでいいの？</BR></BR>→歌に特別な思いを持ったあなた。</BR></BR>遠くからステージを見てるだけじゃなく、</BR>せっかくなら色んな人と一緒に演奏してみませんか？</BR></BR>■忘れかけた情熱を取り戻せ</BR></BR>→かつては本気で音楽にのめり込んだのに、</BR>今では仕事に追われて音楽を忘れてしまいがちなあなた。</BR></BR>ココで楽器を鳴らして情熱を取り戻しませんか？</BR></BR>■洋楽のセッションもいいけど</BR></BR>→日本独自のカルチャーとしての</BR>「J-POP」で「ジャムる」ことで見えて来る </BR>東京渋谷発、世界へ向けた「新しいセッション文化」を</BR>一緒につくりませんか？？</BR></BR>-</BR></BR>『J-POP JAM』とは</BR>あなたの音楽活動がもっとひろがる場所。</BR></BR>誰もが知ってるJPOPの名曲30曲から好きな曲を選んで、</BR>その場で一緒に演奏するイベント。</BR></BR>・シンガーが歌いたい曲を</BR>ホストバンドと楽器奏者がサポートして演奏してもいいし、</BR></BR>・楽器奏者がプレイしたい曲を</BR>歌えるシンガーを募って演奏してもOK。</BR></BR>→その場限りで生まれる</BR>[出会い]と[音楽の科学反応]を</BR></BR>みんなで楽しもう！</BR></BR>不安があってもプロのバンドが支えます。</BR></BR>今までありそうでなかった</BR></BR>《JPOP限定のジャムセッション》</BR></BR>[楽譜]も用意されているので、</BR>腕に自信のあるミュージシャンは</BR>プロ、アマ問わず大歓迎！</BR></BR></BR>【ルール説明】</BR></BR>１. スマホで楽曲エントリー</BR></BR>→自分の名前、パート(Vo. Gt. など)をエントリー。</BR>わからない、持っていなくてもスタッフがサポートします。</BR>※観覧のみもOK</BR></BR>２. ジャムタイム！</BR></BR>→様々な参加者と一緒にJ-POPを歌い演奏します</BR></BR>
-３.『いいねポイント』でコミュニケーション</BR></BR>→素敵なミュージシャンに、</BR>『いいねポイント』を送信して楽しもう！</BR>【J-POP JAMの特長】</BR></BR>■楽曲は、１曲３分</BR></BR>→より多くの方と演奏して頂くために</BR>基本の目安を『1曲 / 約3分』の長さにしています。</BR></BR></BR></BR>【コンテンツ】</BR></BR></BR>■ベスト「いいねスト」賞、表彰タイム</BR></BR>→その日最も『いいね』を集めた人を表彰します。</BR>J-POP JAMから「Sweetなプレゼント」を贈呈！</BR></BR>■プチGUSHAAAN TIME</BR></BR>→参加者全員で5曲選び、リレー形式で続けて演奏します。</BR>まさに生バンドDJタイム！</BR></BR></BR>【最後に】</BR></BR>『J-POP JAM』にかける熱い想いを綴りました。</BR><a href="http://liveartist.info/forjpj/">http://liveartist.info/forjpj/</a></BR></BR>皆様と一緒にJ-POPを奏でられることを</BR>心より楽しみにしております！</BR></BR>
+３.『いいねポイント』でコミュニケーション</BR></BR>→素敵なミュージシャンに、</BR>『いいねポイント』を送信して楽しもう！</BR>【J-POP JAMの特長】</BR></BR>■楽曲は、１曲３分</BR></BR>→より多くの方と演奏して頂くために</BR>基本の目安を『1曲 / 約3分』の長さにしています。</BR></BR></BR></BR>【コンテンツ】</BR></BR></BR>■ベスト「いいねスト」賞、表彰タイム</BR></BR>→その日最も『いいね』を集めた人を表彰します。</BR>J-POP JAMから「Sweetなプレゼント」を贈呈！</BR></BR>■プチGUSHAAAN TIME</BR></BR>→参加者全員で5曲選び、リレー形式で続けて演奏します。</BR>まさに生バンドDJタイム！</BR></BR></BR>【最後に】</BR></BR>『J-POP JAM』にかける熱い想いを綴りました。</BR><a href="https://liveartist.info/forjpj/">https://liveartist.info/forjpj/</a></BR></BR>皆様と一緒にJ-POPを奏でられることを</BR>心より楽しみにしております！</BR></BR>
     </div>
+
   </div>
 </div>
 
@@ -132,6 +154,7 @@ export default {
       username: '',
       password: '',
       isButtonDisabled1: false,
+      isLoading: true,
 
     }
   },
@@ -142,7 +165,7 @@ export default {
 
     signIn: function () {
 
-    
+    this.isLoading = false;
  
 
       firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(

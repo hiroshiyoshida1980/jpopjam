@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import top from '@/components/top'
+import stream from '@/components/stream'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 import List from '@/components/list'
@@ -18,12 +19,20 @@ let router = new Router({
       path: '*',
       redirect: 'signin'
     },
-    
+
 
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
+      name: 'top',
+      component: top,
+      meta: { requiresAuth: true }
+
+    },
+
+    {
+      path: '/stream',
+      name: 'stream',
+      component: stream,
       meta: { requiresAuth: true }
 
     },

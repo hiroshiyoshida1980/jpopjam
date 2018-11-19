@@ -23,14 +23,11 @@
   
 
   <div v-if="isLoading">
-  <a class="item-image"><img :src="image" width="35" height="35"></a>
   <a class="button is-light" @click="upload" >
         <i class="fas fa-upload"></i>UPLOAD</a></a>
-      <p　class="is-size-7">左のアイコンに反映されない場合は何度かやり直してください。</p>
 </div>
 <div v-else>
-  <a class="button is-loading">
-  </i>Loading</a>
+  <a class="button is-loading">Loading</a>
   </div>
 
 <div style="height:20px;"></div>
@@ -228,7 +225,7 @@ firebase.auth().onAuthStateChanged(user => {
                      function setimage(){
                      self.image = url;
                      self.isLoading = true;
-                     alert('upload完了')
+                     alert('upload完了反映されるまでしばらく時間がかかります')
                      }
 
                      setTimeout(setimage(),7000);
