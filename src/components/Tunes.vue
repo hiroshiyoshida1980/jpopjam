@@ -1,51 +1,73 @@
 <template>
-<div class="Tunes">
+  <div class="Tunes">
+    <div
+      class="container has-text-centered"
+      style="list-style: none; height:50%; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+    >
+      <ul>
+        <li class="is-size-6" v-for="item in flist">
+          FIN No.{{item.sessionOrder}}：
+          {{item.entune}} {{item.parts}}.{{item.name}}
+          {{item.stage}}{{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
+        </li>
+      </ul>
+      <router-link to="/listcon">
+        <h6 class="is-size-5">
+          <B>NOW</B>
+        </h6>
+      </router-link>
+      <ul>
+        <li class="is-size-5" v-for="item in clist">
+          <div class="PR" style="background-color:#f0e68c; border-radius: 3px;">
+            <div class="item-image">
+              <img :src="item.image" width="50" height="50">
+            </div>
+            <h6 class="is-size-3">
+              <B>No.{{item.sessionOrder}}： {{item.entune}}  {{item.stage}}</B>
+            </h6>
+          </div>
+          <div class="PR" style="background-color:#fffacd;">
+            <B>{{item.parts}}.{{item.name}}</B>
+            {{item.pr}}
+          </div>
+          <B>{{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}</B>
+        </li>
+      </ul>
+    </div>
 
-  <div style="height:500px; width:100%; overflow-y:auto; padding:10px; border-radius: 3px;">
-  <li class="is-size-6" v-for = "item in flist"　style="list-style: none; background-color:#FFFFFF	; text-align:left; padding:10px; margin:1px; border-radius: 3px;">
- 
-  <a class="item-image"><img :src= item.image width="30" height="30"></a><B> No.{{item.sessionOrder}}：</B> {{item.entune}} {{item.parts}}.{{item.name}} <br>{{item.stage}}{{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
-  </a></li>
+    <h6 class="is-size-6">
+      <B>いろいろつぶやいてね。</B>
+    </h6>
 
-<h6 class="is-size-6"><B>NOW</B></h6> 
-<ul>
-<li class="is-size-5" v-for = "item in clist"　style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;">
- 
-<div class="item-image" style="float: left; pading:5px; height:50px; width:50px;" ><img :src= item.image width="40" height="40"></div><h6 class="is-size-5" style="padding:1px;"><B> No.{{item.sessionOrder}}： {{item.entune}}</B>
-<B>     {{item.parts}}.{{item.name}}</B></h6> <br> {{item.pr}}
-<br> <B>{{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}</B>
-</a></li>
-</ul> 
+    <div
+      class="container has-text-centered"
+      style="height:50%; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+    >
+      <div>
+        <li class="is-size-6" v-for="item in board">
+          <a class="item-image">
+            <img :src="item.image" width="30" height="30">
+          </a>
+          <B>{{item.name}} :</B>
+          <a v-html="item.messege">{{item.messege}}</a>
+        </li>
+      </div>
+    </div>
 
+    <h6 class="is-size-4">
+      <B>＜いいネスト＞</B>
+    </h6>
+    <div>
+      <ul>
+        <li v-for="(item,index) in toplist">
+          <a class="item-image">
+            <img :src="item.image" width="50" height="50">
+          </a>
+          <h6 class="is-size-4">{{item.name}} :{{item.getapt}}いいね！</h6>
+        </li>
+      </ul>
+    </div>
   </div>
-
-<div style="height:100px;"></div>
-<h6 class="is-size-6"><B>いろいろつぶやいてね。</B></h6> 
-  <div style="height:300px; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;">
-   <li class="is-size-6" v-for = 'item in board' style="list-style: none;">
-  <a class="item-image"><img :src= item.image width="30" height="30"></a><B>  {{item.name}} : </B><a v-html="item.messege">{{item.messege}}</a>
-  </li>
-  </div>
-
-
-
-<div style="height:400px;"></div>
-
-<h6 class="is-size-4"><B>＜いいネスト＞</B></h6> 
-<div style="height:450px;  overflow-y:auto;" >
-<ul>
-<li v-for = "(item, index) in toplist" style="list-style: none; background-color:#FFFFFF; padding:10px; border-radius: 3px;">
-
-<a class="item-image" ><img :src= item.image width="50" height="50"></a> <h6 class="is-size-4">{{item.name}} :{{item.getapt}}いいね！</h6> 
-</li>
-</ul> 
-</div>
-
-
-
-</div>
- 
-
 </template>
 
 
@@ -120,6 +142,7 @@ export default {
     // データベースの変更を購読、最新状態をlistにコピーする
 
     listen() {
+      var board = [];
       firebase
         .database()
         .ref("myBoard/")

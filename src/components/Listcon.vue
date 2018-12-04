@@ -1,130 +1,209 @@
 <template>
-<div class="listcon">
+  <div class="listcon">
+    <h6 class="is-size-7">
+      <B>＜エントリー表＞</B>
+    </h6>
+    <li
+      class="is-size-7"
+      v-for="item in entrylist"
+      style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+    >
+      <a class="item-image">
+        <img :src="item.image" width="30" height="30">
+      </a>
+      <B>{{item.playtimes}}回Play</B>
+      {{item.entrynumber}}{{item.entune}} {{item.parts}}.{{item.name}}
+      <br>
+      {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}:確定順番{{item.sessionOrder}}
+    </li>
 
+    <div style="height:10px;"></div>
 
-<h6 class="is-size-7"><B>＜エントリー表＞</B></h6> 
-   <li class="is-size-7" v-for = "item in entrylist"　style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;">
- 
- 
-  <a class="item-image"><img :src= item.image width="30" height="30"></a> <B>{{item.playtimes}}回Play</B> {{item.entrynumber}}{{item.entune}} {{item.parts}}.{{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}:確定順番{{item.sessionOrder}}
-  </a></li>
-<h6 class="is-size-7"><B>セッションを選択</B></h6> 
-<div style="height:10px;"></div>
+    <h6 class="is-size-7">
+      <B>セッションを選択</B>
+    </h6>
 
+    <multiselect
+      v-model="selectedplSession"
+      deselect-label="セッションを選んでください。"
+      track-by="entrynumber"
+      label="meta"
+      placeholder="セッションを選ぶ。"
+      :options="forSelectlist"
+      :searchable="true"
+      :show-labels="false"
+    ></multiselect>
 
-<multiselect v-model="selectedplSession" deselect-label="セッションを選んでください。" track-by="entrynumber" label="meta"
- placeholder="セッションを選ぶ。" :options="forSelectlist" :searchable="true"  :show-labels="false">
-</multiselect>
+    <div id="example-1">
+      <p>今{{ toOrder }}番目まで確定していて,{{ plyor}}番目まで演奏が終わっています。</p>
+    </div>
+    <a class="button is-info" style="text-align: left;" @click="setplaylist">セッション順番を確定</a>
 
- <div id="example-1"> <p>今{{ toOrder }}番目まで確定していて,{{ plyor}}番目まで演奏が終わっています。</p></div> 
-<a　class="button is-info" style="text-align: left;"  @click="setplaylist">セッション順番を確定</a>  
-      <a　class="button is-danger" style="text-align: left;"  @click="sessionfinish">セッションを進める！！</a>  
-           
-<div style="height:10px;"></div>
-<multiselect v-model="selectedplSession3" deselect-label="セッションを選んでください。" track-by="entrynumber" label="meta"
- placeholder="セッションを選ぶ。" :options="entrylist" :searchable="true"  :show-labels="false">
-</multiselect>
-<a　class="button is-info" style="text-align: left;"  @click="deletePlaylist">セッションを削除</a>  
+    <div style="height:20px;"></div>
 
-<a　class="button is-info" style="text-align: left;"  @click="changeStage">ステージを変更</a>  
+    <multiselect
+      v-model="selectedfinSession"
+      deselect-label="終わらせるセッションを選んでください。"
+      track-by="entrynumber"
+      label="meta"
+      placeholder="終わらせるセッションを選んでください。"
+      :options="clist"
+      :searchable="true"
+      :show-labels="false"
+    ></multiselect>
 
+    <a class="button is-danger" style="text-align: left;" @click="sessionfinish">セッション終了！！</a>
 
+    <div style="height:10px;"></div>
+    <multiselect
+      v-model="selectedplSession3"
+      deselect-label="セッションを選んでください。"
+      track-by="entrynumber"
+      label="meta"
+      placeholder="セッションを選ぶ。"
+      :options="entrylist"
+      :searchable="true"
+      :show-labels="false"
+    ></multiselect>
+    <a class="button is-info" style="text-align: left;" @click="deletePlaylist">セッションを削除</a>
+    
+    <a class="button is-info" style="text-align: left;" @click="changeStage">ステージを変更</a>
 
-<multiselect v-model="selectedplSession2" deselect-label="セッションを選んでください。" track-by="entrynumber" label="meta"
- placeholder="順番を入れ替える先のセッションを選ぶ。" :options="entrylist" :searchable="true"  :show-labels="false">
-</multiselect>
-<a　class="button is-info" style="text-align: left;"  @click="changePlaylist">セッション順を入れ替える</a>  
+    <multiselect
+      v-model="selectedplSession2"
+      deselect-label="セッションを選んでください。"
+      track-by="entrynumber"
+      label="meta"
+      placeholder="順番を入れ替える先のセッションを選ぶ。"
+      :options="entrylist"
+      :searchable="true"
+      :show-labels="false"
+    ></multiselect>
+    <a class="button is-info" style="text-align: left;" @click="changePlaylist">セッション順を入れ替える</a>
 
+    <div style="height:30px;">
+      <router-link to="/tunes">画面表示</router-link>
+    </div>
+    <h6 class="is-size-5">代理コーナー</h6>
+    <div style="background-color: lightgray;">
+      <multiselect
+        v-model="selected"
+        deselect-label="一人を選んでください。"
+        track-by="uid"
+        label="name"
+        placeholder="誰の代理？"
+        :options="loginUserList"
+        :searchable="true"
+        :allow-empty="false"
+        :show-labels="false"
+      ></multiselect>
 
+      <div style="height:20px;"></div>
+      <h6 class="is-size-5">代理NEW ENTRY</h6>
+      <div style="height:10px;"></div>
 
+      <multiselect
+        v-model="selectedStage"
+        deselect-label="ステージを選んでください。"
+        placeholder="ステージを選ぶ。"
+        :options="stage"
+        :searchable="true"
+        :allow-empty="false"
+        :show-labels="false"
+      ></multiselect>
+      <div style="height:10px;"></div>
+      <multiselect
+        v-model="selectedParts"
+        deselect-label="パートを選んでください。"
+        placeholder="パートを選ぶ。"
+        :options="parts"
+        :searchable="true"
+        :allow-empty="false"
+        :show-labels="false"
+      ></multiselect>
+      <div style="height:10px;"></div>
+      <multiselect
+        v-model="selectedTunes"
+        deselect-label="曲を選んでください。"
+        placeholder="曲を選ぶ。"
+        :options="tunes"
+        :searchable="true"
+        :allow-empty="false"
+        :show-labels="false"
+      ></multiselect>
+      <div style="height:10px;"></div>
+      <multiselect
+        v-model="selectedKeys"
+        deselect-label="キーを選んでください"
+        placeholder="キーを選ぶ。"
+        :options="keys"
+        :searchable="true"
+        :allow-empty="false"
+        :show-labels="false"
+      ></multiselect>
 
+      <div style="height:20px;"></div>
 
+      <div>
+        <a class="button is-danger" @click="newEntry">代理NEW ENTRY</a>
+      </div>
 
+      <div style="height:30px;"></div>
 
+      <h6 class="is-size-5">代理JOIN</h6>
+      <div style="height:10px;"></div>
 
+      <multiselect
+        v-model="selectedSession"
+        deselect-label="セッションを選んでください。"
+        track-by="meta"
+        label="meta"
+        placeholder="セッションを選ぶ。"
+        :options="entrylist"
+        :searchable="true"
+        :show-labels="false"
+      ></multiselect>
+      <div style="height:10px;"></div>
+      <multiselect
+        v-model="selectedParts"
+        deselect-label="パートを選んでください。"
+        placeholder="パートを選ぶ。"
+        :options="parts"
+        :searchable="true"
+        :show-labels="false"
+      ></multiselect>
 
+      <div style="height:20px;"></div>
 
+      <div>
+        <a class="button is-danger" @click="sendJoin">Join！</a>
+      </div>
 
+      <div style="height:20px;"></div>
 
-<div style="height:10px;"></div>
-<h6 class="is-size-5">代理コーナー</h6> 
-<div style="background-color: lightgray;">
+      <div style="height:10px;"></div>
+      <li
+        class="is-size-7"
+        v-for="item in entrylist"
+        style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+      >
+        <a class="item-image">
+          <img :src="item.image" width="20" height="20">
+        </a>
+        <B>No.{{item.sessionOrder}}：</B>
+        {{item.entune}} {{item.parts}}.{{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
+      </li>
 
-                    <multiselect v-model="selected" deselect-label="一人を選んでください。" track-by="uid" label="name"
-                      placeholder="誰の代理？" :options="loginUserList" :searchable="true" :allow-empty="false" :show-labels="false">
-                    </multiselect>
+      <div style="height:50px;"></div>
+    </div>
 
-<div style="height:20px;"></div> 
-<h6 class="is-size-5">代理NEW ENTRY</h6> 
-<div style="height:10px;"></div>   
-
-
-                    <multiselect v-model="selectedStage" deselect-label="ステージを選んでください。" 
-                        placeholder="ステージを選ぶ。" :options="stage" :searchable="true" :allow-empty="false" :show-labels="false">
-                    </multiselect>
-<div style="height:10px;"></div> 
-                    <multiselect v-model="selectedParts" deselect-label="パートを選んでください。" 
-                        placeholder="パートを選ぶ。" :options="parts" :searchable="true" :allow-empty="false" :show-labels="false">
-                    </multiselect>
-<div style="height:10px;"></div> 
-                    <multiselect v-model="selectedTunes" deselect-label="曲を選んでください。" 
-                        placeholder="曲を選ぶ。" :options="tunes" :searchable="true" :allow-empty="false" :show-labels="false">
-                    </multiselect>
-<div style="height:10px;"></div> 
-                    <multiselect v-model="selectedKeys" deselect-label="キーを選んでください" 
-                        placeholder="キーを選ぶ。" :options="keys" :searchable="true" :allow-empty="false" :show-labels="false">
-                    </multiselect>
-
-<div style="height:20px;"></div>
-
-            <div>
-            <a class="button is-danger" @click="newEntry" >代理NEW ENTRY</a>
-            </div>
-
-
-
-<div style="height:30px;"></div>
-
-<h6 class="is-size-5">代理JOIN </h6> 
-<div style="height:10px;"></div>   
-
-<multiselect v-model="selectedSession" deselect-label="セッションを選んでください。" track-by="meta" label="meta"
- placeholder="セッションを選ぶ。" :options="entrylist" :searchable="true"  :show-labels="false">
-                    </multiselect>
-<div style="height:10px;"></div>
-                    <multiselect v-model="selectedParts" deselect-label="パートを選んでください。" 
-                        placeholder="パートを選ぶ。" :options="parts" :searchable="true" :show-labels="false">
-                    </multiselect>
-
-<div style="height:20px;"></div>
-
-            <div>
-            <a class="button is-danger" @click="sendJoin" >Join！</a>
-            </div>
-
-
-<div style="height:20px;"></div>
-
-<div style="height:10px;"></div>
-   <li class="is-size-7" v-for = "item in entrylist"　style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;">
-  <a class="item-image"><img :src= item.image width="20" height="20"></a> <B>No.{{item.sessionOrder}}：</B> {{item.entune}} {{item.parts}}.{{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
-  </a></li>
-
-<div style="height:50px;"></div>
-</div>
-
-<input class="input" v-model="videoId" type="text" placeholder="videoId">
+    <input class="input" v-model="videoId" type="text" placeholder="videoId">
     <div>
-            <a class="button is-danger" @click="sendvideoId" >sendvideoId</a>
-            </div>
- 
- <a　class="button is-light" style="text-align: left;"  @click="sendReset">全ポイントリセット</a>  
+      <a class="button is-danger" @click="sendvideoId">sendvideoId</a>
+    </div>
 
+    <a class="button is-light" style="text-align: left;" @click="sendReset">全ポイントリセット</a>
   </div>
-
-</div>
- 
-
 </template>
 
 
@@ -142,7 +221,7 @@ export default {
       mslist: "",
       eboard: "",
       entrylist: [],
-      videoId: "XOzGU9hQptU",
+      videoId: "https://www.youtube.com/watch?v=XOzGU9hQptU",
       finlist: [],
       finnumber: 0,
       selectedSession: [],
@@ -150,6 +229,7 @@ export default {
       selectedplSession2: [],
       selectedplSession3: [],
       selectedPersonpr: [],
+      selectedfinSession: [],
       selectedParts: null,
       entune: "",
       plyor: [],
@@ -157,6 +237,7 @@ export default {
       selectedPerson: [],
       loginUserList: [],
       en1: "",
+      nowplaynumber: "",
       artistname: "",
       notbr: "",
       isButtonDisabled: false,
@@ -222,6 +303,7 @@ export default {
         "恋/星野源",
         "今夜はブギーバック/小沢健二 featuring スチャダラパー",
         "残酷な天使のテーゼ/高橋洋子",
+        "白い恋人達/桑田佳祐",
         "接吻/ORIGINAL LOVE",
         "そばかす/JUDY AND MARY",
         "小さな恋のうた/モンゴル800",
@@ -231,9 +313,11 @@ export default {
         "ハナミズキ/一青窈",
         "ハピネス/AI",
         "ひまわりの約束/秦基博",
+        "プレイバックPart2/山口百恵",
         "丸の内サディステック/椎名林檎",
         "三日月/絢香",
         "夜空ノムコウ/SMAP",
+        "ロマンスの神様/広瀬香美",
         "ロビンソン/スピッツ"
       ], //  tunes: ["CHALA HEAD CHALA/影山ヒロノブ","ペガサス幻想/MAKE UP","微笑みの爆弾/馬渡松子","残酷な天使のテーゼ/高橋祥子","Can Do/グランロデオ","イマジネーション/スパイエアー","EGNITE/藍井エイル","Catch the Moment/LiSA","Brave Shine/Aimer","世界が終わるまでは/WANDS","ようこそジャパリパークへ/けものフレンズ","Butter-fly/和田光司","アンバランスなKISSをして/高橋ひろ","ライオン/シェリル＆ランカ","打ち上げ花火/DAOKO 米津玄師","炎のキン肉マン/串田アキラ","君の知らない物語/supercell","君が好きだと叫びたい/BAAD","ゆずれない願い/田村直美","めざせポケモンマスター！/松本梨香","GETWILD/TM NETWORK"],
       keys: [
@@ -418,7 +502,7 @@ export default {
 
     sendvideoId() {
       var videoId = this.videoId;
-      var result = videoId.replace( 'https://youtu.be/', '' );
+      var result = videoId.replace("https://www.youtube.com/watch?v=", "");
       firebase
         .database()
         .ref("videoId/")
@@ -565,8 +649,10 @@ export default {
     },
 
     sessionfinish() {
-      var po = this.plyor;
-      var nowplaynumber = po + 1;
+      var nowplaynumber = this.selectedfinSession["sessionOrder"];
+      var finMainame = this.selectedfinSession["name"];
+      var finMainimage = this.selectedfinSession["image"];
+      var finsessmeta = this.selectedfinSession["meta"];
       var np = 0;
 
       firebase
@@ -578,6 +664,11 @@ export default {
         .once("value", function(snapshot) {
           const rootList = snapshot.val();
           let list = [];
+
+  confirm(
+            "このセッションを終了してもいいですか？\n\n取り消せません！！！" +
+              finsessmeta
+          )
 
           Object.keys(rootList).forEach((val, key) => {
             firebase
@@ -602,6 +693,16 @@ export default {
               .update({
                 sessionStatus: "finished"
               });
+
+                        firebase
+            .database()
+            .ref("myBoard/")
+            .push({
+              image: finMainimage,
+              name: finMainame,
+              messege: "おつかれさまでした！"
+            });
+
           });
         });
     },
