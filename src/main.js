@@ -4,9 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
-import VueSweetalert2 from 'vue-sweetalert2'
 import 'vue-croppa/dist/vue-croppa.css'
-
 import VueYoutube from 'vue-youtube'
 
 Vue.use(VueYoutube)
