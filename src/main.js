@@ -18,7 +18,6 @@ import '@fortawesome/fontawesome-free-webfonts/css/fa-brands.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-regular.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
  
-Vue.use(VueSweetalert2);
 Vue.config.productionTip = false
 
 var config = {
