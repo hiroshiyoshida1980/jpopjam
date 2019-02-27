@@ -59,7 +59,7 @@
       <br>※名前は今日1日は変更できません。
     </p>
     <div style="height:20px;"></div>
-    <a class="button is-danger" @click="namechange">登録して参加！</a>
+    <a class="button is-danger" @click="namechange">登録</a>
 
     <div style="height:20px;"></div>今日の参加者
     <div style="height:20px;"></div>
@@ -67,6 +67,12 @@
     <div style="height:100px; width:100%; overflow-y:auto; scrollbar-base-color:#23d160;">
       <li class="is-size-7" v-for="item in options">{{item.name}}さんが参加中</li>
     </div>
+    <div style="height:20px;"></div>
+    <a class="button">
+      <router-link to="/">
+        <i class="fas fa-backward">HOMEへ戻る</i>
+      </router-link>
+    </a>
   </div>
 </template>
 
@@ -77,7 +83,7 @@ import Multiselect from "vue-multiselect";
 import axios from "axios";
 
 export default {
-  name: "Person",
+  name: "personchange",
   components: { Multiselect },
 
   data() {
@@ -251,8 +257,6 @@ export default {
     }
   }
 };
-
-
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

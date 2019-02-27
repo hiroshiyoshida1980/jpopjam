@@ -3,21 +3,50 @@
     <h6 class="is-size-7">
       <B>＜エントリー表＞</B>
     </h6>
-    <li
-      class="is-size-7"
-      v-for="item in entrylist"
-      style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
-    >
-      <a class="item-image">
-        <img :src="item.image" width="30" height="30">
-      </a>
-      <B>{{item.playtimes}}回Play</B>
-      {{item.entrynumber}}{{item.entune}} {{item.parts}}.{{item.name}}
-      <br>
-      {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}:確定順番{{item.sessionOrder}}
-    </li>
 
-    <div style="height:10px;"></div>
+    <div
+      style="height:500px; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+    >
+      <draggable
+        :options="{group:'group', animation: 150}"
+        :list="entrylist"
+        element="ul"
+        @end="draggableEnd"
+      >
+        <li v-for="item in entrylist" :key="item.entrynumber">
+          <a class="item-image">
+            <img :src="item.image" width="30" height="30">
+          </a>
+          <B>{{item.playtimes}}回Play</B>
+          <div class="entrynumber">{{item.entrynumber}}</div>
+          {{item.entune}} {{item.parts}}.{{item.name}}
+          <br>
+          {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}:確定順番{{item.sessionOrder}}
+        </li>
+      </draggable>
+      <div style="height:50px;"></div>
+
+      <h2>List 2 Draggable</h2>
+      <div style="height:50px;"></div>
+
+      <draggable
+        :options="{group:'group', animation: 150}"
+        :list="sessionOrderList"
+        element="ul"
+        @end="draggableEnd"
+      >
+        <li v-for="item in sessionOrderList" :key="item.entrynumber">
+          <a class="item-image">
+            <img :src="item.image" width="30" height="30">
+          </a>
+          <B>{{item.playtimes}}回Play</B>
+          <div class="entrynumber">{{item.entrynumber}}</div>
+          {{item.entune}} {{item.parts}}.{{item.name}}
+          <br>
+          {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}:確定順番{{item.sessionOrder}}
+        </li>
+      </draggable>
+    </div>
 
     <h6 class="is-size-7">
       <B>セッションを選択</B>
@@ -69,21 +98,10 @@
     
     <a class="button is-info" style="text-align: left;" @click="changeStage">ステージを変更</a>
 
-    <multiselect
-      v-model="selectedplSession2"
-      deselect-label="セッションを選んでください。"
-      track-by="entrynumber"
-      label="meta"
-      placeholder="順番を入れ替える先のセッションを選ぶ。"
-      :options="entrylist"
-      :searchable="true"
-      :show-labels="false"
-    ></multiselect>
-    <a class="button is-info" style="text-align: left;" @click="changePlaylist">セッション順を入れ替える</a>
+    <div style="height:50px;"></div>
+    <router-link to="/tunes">画面表示</router-link>
+    <div style="height:50px;"></div>
 
-    <div style="height:30px;">
-      <router-link to="/tunes">画面表示</router-link>
-    </div>
     <h6 class="is-size-5">代理コーナー</h6>
     <div style="background-color: lightgray;">
       <multiselect
@@ -210,17 +228,20 @@
 <script>
 import firebase from "firebase";
 import Multiselect from "vue-multiselect";
+import draggable from "vuedraggable";
 
 export default {
   name: "Listcon",
-  components: { Multiselect },
+  components: { Multiselect, draggable },
 
   data() {
     return {
+      tasks: ["task1", "task2", "task3", "task4"],
       list: [],
       mslist: "",
       eboard: "",
       entrylist: [],
+      sessionOrderList: [],
       videoId: "https://www.youtube.com/watch?v=XOzGU9hQptU",
       finlist: [],
       finnumber: 0,
@@ -363,10 +384,22 @@ export default {
       }
     });
   },
-
   methods: {
-    // データベースの変更を購読、最新状態をlistにコピーする
-
+    draggableEnd(event) {
+      console.log(this.sessionOrderList);
+    },
+    add: function() {
+      this.entrylist.push({
+        name: "Juan"
+      });
+    },
+    replace: function() {
+      this.entrylist = [
+        {
+          name: "Edgard"
+        }
+      ];
+    },
     listen() {
       // ログインユーザーのリスト
 
@@ -540,6 +573,7 @@ export default {
       if (confirm("本当に削除しますか？")) {
         var entrysesskey = this.selectedplSession3["entrynumber"];
         var entrysessmeta = this.selectedplSession3["meta"];
+        var artistuid = this.selectedplSession3["artistuid"];
         var np = 0;
 
         firebase
@@ -548,6 +582,13 @@ export default {
           .update({
             sessionOrder: 0,
             sessionStatus: "deleted"
+          });
+
+        firebase
+          .database()
+          .ref("loginuser/" + artistuid)
+          .update({
+            status: "not_entry"
           });
 
         firebase
@@ -607,47 +648,6 @@ export default {
       }
     },
 
-    changePlaylist() {
-      if (confirm("本当に入れ替えしますか？")) {
-        var entrysesskey = this.selectedplSession3["entrynumber"];
-        var entrysessOrder = this.selectedplSession3["sessionOrder"];
-        var entrysessmeta = this.selectedplSession3["meta"];
-        var toentrysesskey = this.selectedplSession2["entrynumber"];
-        var toentrysessOrder = this.selectedplSession2["sessionOrder"];
-        var toentrysessmeta = this.selectedplSession2["meta"];
-
-        firebase
-          .database()
-          .ref("entryBoard/" + entrysesskey)
-          .update({
-            sessionOrder: toentrysesskey
-          });
-
-        firebase
-          .database()
-          .ref("entryBoard/" + toentrysesskey)
-          .update({
-            sessionOrder: entrysesskey
-          });
-
-        firebase
-          .database()
-          .ref("myBoard/")
-          .push({
-            image:
-              "https://firebasestorage.googleapis.com/v0/b/jpopjam0813.appspot.com/o/thumb%2Flogo_jpopjam_square_coler.png?alt=media&token=5595b0f7-7ed7-42cf-901f-85894121573d",
-            messege:
-              entrysessmeta +
-              "と" +
-              toentrysessmeta +
-              "の順番が入れ替わりました"
-          });
-
-        this.selectedplSession3 = null;
-        this.selectedplSession2 = null;
-      }
-    },
-
     sessionfinish() {
       var nowplaynumber = this.selectedfinSession["sessionOrder"];
       var finMainame = this.selectedfinSession["name"];
@@ -665,10 +665,10 @@ export default {
           const rootList = snapshot.val();
           let list = [];
 
-  confirm(
+          confirm(
             "このセッションを終了してもいいですか？\n\n取り消せません！！！" +
               finsessmeta
-          )
+          );
 
           Object.keys(rootList).forEach((val, key) => {
             firebase
@@ -694,15 +694,14 @@ export default {
                 sessionStatus: "finished"
               });
 
-                        firebase
-            .database()
-            .ref("myBoard/")
-            .push({
-              image: finMainimage,
-              name: finMainame,
-              messege: "おつかれさまでした！"
-            });
-
+            firebase
+              .database()
+              .ref("myBoard/")
+              .push({
+                image: finMainimage,
+                name: finMainame,
+                messege: "おつかれさまでした！"
+              });
           });
         });
     },

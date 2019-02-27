@@ -1,19 +1,34 @@
 <template>
   <div class="top">
     <nav class="level is-mobile">
+
+
       <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">もらったいいね！</p>
-          <p class="title">{{getapt}}</p>
-        </div>
+        <router-link to="/personchange">
+          <div>
+            <p class="heading">{{ name }}</p>
+            <div class="item-image">
+              <img :src="image" width="60" height="60">
+            </div>
+          </div>
+        </router-link>
+      </div>
+
+      <div class="level-item has-text-centered">
+        <router-link to="/list">
+        <p class="heading">楽曲エントリー</p>
+          <p class="title"><i class="fas fa-play is-size-4"></i></p>
+        </router-link>
       </div>
 
       <div class="level-item has-text-centered">
         <div>
-          <p class="heading">{{ name }}</p>
-          <div class="item-image">
-            <img :src="image" width="35" height="35">
-          </div>
+          <p class="heading">
+            <i class="far fa-thumbs-up"> いいね！</i>
+          </p>
+          <transition mode="out-in" name="bounce">
+            <p class="title" v-if="show" :key="getapt">{{getapt}}</p>
+          </transition>
         </div>
       </div>
 
@@ -30,7 +45,7 @@
     >
       <li class="is-size-6" v-for="item in board" style="list-style: none;">
         <a class="item-image" @click="isImageModalActive = true">
-          <img :src="item.image" width="30" height="30">
+          <img :src="item.image" width="40" height="40">
         </a>
         <B>{{item.name}} :</B>
         <a v-html="item.messege">{{item.messege}}</a>
@@ -54,13 +69,13 @@
     <div style="height:20px;"></div>
 
     <div class="columns is-mobile">
-      <div class="column">
+      <!--      <div class="column">
         <a
           class="button is-danger is-rounded is-small"
           v-bind:disabled="isButtonDisabled1"
           @click="sendMessage"
         >
-          <i class="fas fa-heart">20</i>
+          <i class="far fa-thumbs-up">20</i>
         </a>
       </div>
       <div class="column">
@@ -69,7 +84,7 @@
           v-bind:disabled="isButtonDisabled2"
           @click="sendMessage2"
         >
-          <i class="fas fa-heart">10</i>
+          <i class="far fa-thumbs-up">10</i>
         </a>
       </div>
 
@@ -79,17 +94,19 @@
           v-bind:disabled="isButtonDisabled3"
           @click="sendMessage3"
         >
-          <i class="fas fa-heart">5</i>
+          <i class="far fa-thumbs-up">5</i>
         </a>
       </div>
 
+
+      -->
       <div class="column">
         <a
-          class="button is-light is-rounded is-small"
+          class="button is-danger is-large"
           v-bind:disabled="isButtonDisabled4"
           @click="sendMessage4"
         >
-          <i class="fas fa-heart">1</i>
+          <i class="far fa-thumbs-up is-size-2">いいね！</i>
         </a>
       </div>
     </div>
@@ -103,7 +120,7 @@
     <h6 class="is-size-7">
       <B>
         今日プレイした人たちに
-        <i class="fas fa-heart"></i>やメッセージを！
+        <i class="far fa-thumbs-up"></i>やメッセージを！
       </B>
     </h6>
     <div style="height:20px;"></div>
@@ -178,6 +195,9 @@ export default {
       flist: [],
       isImageModalActive: false
     };
+  },
+  watch: {
+    getapt: function(newValue) {}
   },
 
   created() {
@@ -379,7 +399,7 @@ export default {
             name: artistname,
             sendp: ap,
             to: toname,
-            messege: toname + "に" + '<i class="fas fa-heart"></i>' + ap
+            messege: toname + "に" + '<i class="far fa-thumbs-up"></i>' + ap
           });
       }
     },
@@ -438,7 +458,7 @@ export default {
             name: artistname,
             sendp: ap,
             to: toname,
-            messege: toname + "に" + '<i class="fas fa-heart"></i>' + ap
+            messege: toname + "に" + '<i class="far fa-thumbs-up"></i>' + ap
           });
       }
     },
@@ -498,7 +518,7 @@ export default {
             name: artistname,
             sendp: ap,
             to: toname,
-            messege: toname + "に" + '<i class="fas fa-heart"></i>' + ap
+            messege: toname + "に" + '<i class="far fa-thumbs-up"></i>' + ap
           });
       }
     },
@@ -558,7 +578,7 @@ export default {
             name: artistname,
             sendp: ap,
             to: toname,
-            messege: toname + "に" + '<i class="fas fa-heart"></i>' + ap
+            messege: toname + "に" + '<i class="far fa-thumbs-up"></i>' + ap
           });
       }
     },

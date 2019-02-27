@@ -61,7 +61,7 @@ export default {
                 .database()
                 .ref("loginuser/" + useruid)
                 .set({
-                  apt: 100,
+                  apt: 5,
                   getapt: 0,
                   uid: useruid,
                   played: 0,

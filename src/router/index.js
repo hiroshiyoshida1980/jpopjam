@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import top from '@/components/top'
-import stream from '@/components/stream'
+import personchange from '@/components/personchange'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 import List from '@/components/list'
@@ -29,10 +29,10 @@ let router = new Router({
 
     },
 
-    {
-      path: '/stream',
-      name: 'stream',
-      component: stream,
+ {
+       path: '/personchange',
+      name: 'personchange',
+      component: personchange,
       meta: { requiresAuth: true }
 
     },
