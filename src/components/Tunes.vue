@@ -129,11 +129,8 @@ export default {
         ) {
           this.$router.push("/");
         }
-
-        console.log("ログイン状態.");
         this.listen();
       } else {
-        console.log("ログインしていない状態");
       }
     });
   },
@@ -291,7 +288,6 @@ export default {
 
             Object.keys(rootList).forEach((val, key) => {
               var result = val.match(/player./);
-
               if (result != null) {
                 list.push(rootList[val]);
               }
@@ -303,7 +299,6 @@ export default {
       var selp = selper + 1;
       var selplayernumbername = "player" + selp;
       var selplayernumberuid = "p_uid" + selp;
-
       if (
         selectedsession == null ||
         selectedParts == null ||

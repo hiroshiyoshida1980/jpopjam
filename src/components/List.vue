@@ -15,10 +15,11 @@
       <p>その他不明点もお気軽にお問い合わせください。</p>
     </h5>
 
-              <a class="button"><router-link to="/">
-                <i class="fas fa-backward"> HOMEへ戻る</i>
-              </router-link></a> 
-
+    <a class="button">
+      <router-link to="/">
+        <i class="fas fa-backward">HOMEへ戻る</i>
+      </router-link>
+    </a>
 
     <div style="height:20px;"></div>
     <h4 class="is-size-5">エントリー</h4>
@@ -122,10 +123,11 @@
       {{item.entune}} {{item.parts}}.{{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
     </li>
 
-                  <a class="button" ><router-link to="/">
-                <i class="fas fa-backward"> HOMEへ戻る</i>
-              </router-link></a> 
-
+    <a class="button">
+      <router-link to="/">
+        <i class="fas fa-backward">HOMEへ戻る</i>
+      </router-link>
+    </a>
   </div>
 </template>
 
@@ -237,10 +239,8 @@ export default {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("ログイン状態.");
         this.listen();
       } else {
-        console.log("ログインしていない状態");
       }
     });
   },
@@ -531,7 +531,6 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss">
-@import "./node_modules/bulma/bulma.sass";
 #list {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

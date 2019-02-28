@@ -377,10 +377,8 @@ export default {
           this.$router.push("/");
         }
 
-        console.log("ログイン状態.");
         this.listen();
       } else {
-        console.log("ログインしていない状態");
       }
     });
   },

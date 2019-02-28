@@ -1,44 +1,42 @@
 <template>
   <div class="top">
-    <nav class="level is-mobile">
-
-
-      <div class="level-item has-text-centered">
-        <router-link to="/personchange">
-          <div>
-            <p class="heading">{{ name }}</p>
-            <div class="item-image">
-              <img :src="image" width="60" height="60">
-            </div>
+    <div class="level-item has-text-centered">
+      <router-link to="/personchange">
+        <div>
+          <p class="heading">{{ name }}</p>
+          <div class="item-image">
+            <img :src="image" width="60" height="60">
           </div>
-        </router-link>
-      </div>
+        </div>
+      </router-link>
+    </div>
 
-      <div class="level-item has-text-centered">
-        <router-link to="/list">
+    <div class="level-item has-text-centered">
+      <router-link to="/list">
         <p class="heading">楽曲エントリー</p>
-          <p class="title"><i class="fas fa-play is-size-4"></i></p>
-        </router-link>
-      </div>
+        <p class="title">
+          <i class="fas fa-play is-size-4"></i>
+        </p>
+      </router-link>
+    </div>
 
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">
-            <i class="far fa-thumbs-up"> いいね！</i>
-          </p>
-          <transition mode="out-in" name="bounce">
-            <p class="title" v-if="show" :key="getapt">{{getapt}}</p>
-          </transition>
-        </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">
+          <i class="far fa-thumbs-up">いいね！</i>
+        </p>
+        <transition mode="out-in" name="bounce">
+          <p class="title" v-if="show" :key="getapt">{{getapt}}</p>
+        </transition>
       </div>
+    </div>
 
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">残りポイント</p>
-          <p class="title">{{apt}}</p>
-        </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">残りポイント</p>
+        <p class="title">{{apt}}</p>
       </div>
-    </nav>
+    </div>
 
     <div
       style="height:300px; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
@@ -208,7 +206,6 @@ export default {
         console.log("ログイン状態");
         this.listen();
       } else {
-        console.log("ログインしていない状態");
       }
     });
   },

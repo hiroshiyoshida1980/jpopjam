@@ -1,7 +1,5 @@
 <template>
   <div class="Person">
-    <div style="height:10px;"></div>
-    <div style="height:10px;"></div>
     <h6 class="is-size-6">
       <B>1.アイコン画像変更</B>
     </h6>
@@ -132,10 +130,7 @@ export default {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("ログイン状態.");
         this.listen();
-      } else {
-        console.log("ログインしていない状態");
       }
     });
   },
