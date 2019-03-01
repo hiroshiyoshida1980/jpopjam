@@ -1,7 +1,6 @@
 <template>
   <div class="signup">
     <h2>新規登録</h2>
-    <div style="height:20px;"></div>
     <div class="field">
       <div class="control has-icons-left has-icons-right">
         <input v-model="username" class="input" type="email" placeholder="Email input">
@@ -20,7 +19,8 @@
       </p>
     </div>
 
-    <a class="button is-danger bd-rainbow" v-bind:disabled="isButtonDisabled1" @click="signUp">登録
+    <a class="button is-danger bd-rainbow" v-bind:disabled="isButtonDisabled1" @click="signUp">
+      登録
       <a v-show="isButtonDisabled1">中:しばらくお待ちください・・</a>
     </a>
 
@@ -61,23 +61,23 @@ export default {
                 .database()
                 .ref("loginuser/" + useruid)
                 .set({
-                  apt: 100,
+                  apt: 5,
                   getapt: 0,
                   uid: useruid,
                   played: 0,
                   image:
                     "https://firebasestorage.googleapis.com/v0/b/jpopjam0813.appspot.com/o/user-circle-regular.svg?alt=media&token=3ccba9d4-2976-40cd-977d-687da4c2ef9c",
                   status: "not_entry"
-                })
+                });
 
-              this.$router.push("/person")
-            })
+              this.$router.push("/person");
+            });
         })
         .catch(error => {
-          alert(error.message)
+          alert(error.message);
 
           this.isButtonDisabled1 = false;
-        })
+        });
     }
   }
 };

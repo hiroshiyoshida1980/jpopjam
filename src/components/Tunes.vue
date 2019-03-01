@@ -18,12 +18,12 @@
       </router-link>
       <ul>
         <li class="is-size-5" v-for="item in clist">
-          <div class="PR" style="background-color:#f0e68c; border-radius: 3px;">
+          <div class="PR" style="list-style: none; background-color:#f0e68c; border-radius: 3px;">
             <div class="item-image">
               <img :src="item.image" width="50" height="50">
             </div>
             <h6 class="is-size-3">
-              <B>No.{{item.sessionOrder}}： {{item.entune}}  {{item.stage}}</B>
+              <B>No.{{item.sessionOrder}}： {{item.entune}} {{item.stage}}</B>
             </h6>
           </div>
           <div class="PR" style="background-color:#fffacd;">
@@ -41,7 +41,7 @@
 
     <div
       class="container has-text-centered"
-      style="height:50%; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+      style="list-style: none; height:50%; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
     >
       <div>
         <li class="is-size-6" v-for="item in board">
@@ -61,7 +61,7 @@
       <ul>
         <li v-for="(item,index) in toplist">
           <a class="item-image">
-            <img :src="item.image" width="50" height="50">
+            <img :src="item.image" width="100" height="100">
           </a>
           <h6 class="is-size-4">{{item.name}} :{{item.getapt}}いいね！</h6>
         </li>
@@ -129,11 +129,8 @@ export default {
         ) {
           this.$router.push("/");
         }
-
-        console.log("ログイン状態.");
         this.listen();
       } else {
-        console.log("ログインしていない状態");
       }
     });
   },
@@ -291,7 +288,6 @@ export default {
 
             Object.keys(rootList).forEach((val, key) => {
               var result = val.match(/player./);
-
               if (result != null) {
                 list.push(rootList[val]);
               }
@@ -303,7 +299,6 @@ export default {
       var selp = selper + 1;
       var selplayernumbername = "player" + selp;
       var selplayernumberuid = "p_uid" + selp;
-
       if (
         selectedsession == null ||
         selectedParts == null ||

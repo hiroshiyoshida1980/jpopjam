@@ -7,7 +7,7 @@
       <div style="height:10px;"></div>
       <p>新規エントリーとは別に、他の人のセッションに参加(JOIN)は自由にできますが、譲り合いの精神をもってお願いいたします。</p>
       <div style="height:10px;"></div>
-      <p>演奏順が決定したら、会場モニターに表示されますので、自分の出番の３曲前には準備をお願いいたします。</p>
+      <p>演奏順が決定したら、会場モニターに表示されますので、自分の出番の1曲前にはステージ脇にて準備をお願いいたします。</p>
       <div style="height:10px;"></div>
       <p>演奏の前には指定のステージで、他のメンバーに挨拶＆打ち合わせを！！</p>
       <div style="height:10px;"></div>
@@ -15,8 +15,14 @@
       <p>その他不明点もお気軽にお問い合わせください。</p>
     </h5>
 
+    <a class="button">
+      <router-link to="/">
+        <i class="fas fa-backward">HOMEへ戻る</i>
+      </router-link>
+    </a>
+
     <div style="height:20px;"></div>
-    <h6 class="is-size-5">エントリー</h6>
+    <h4 class="is-size-5">エントリー</h4>
     <div style="height:10px;"></div>
     <multiselect
       v-model="selectedStage"
@@ -116,6 +122,12 @@
       <B>No.{{item.sessionOrder}}：</B>
       {{item.entune}} {{item.parts}}.{{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
     </li>
+
+    <a class="button">
+      <router-link to="/">
+        <i class="fas fa-backward">HOMEへ戻る</i>
+      </router-link>
+    </a>
   </div>
 </template>
 
@@ -158,6 +170,7 @@ export default {
         "I LOVE YOU/クリス・ハート",
         "I LOVE YOU/尾崎豊",
         "LA・LA・LA LOVE SONG/久保田利伸",
+        "Lemon/米津玄師",
         "LOVEマシーン/モーニング娘。",
         "R.Y.U.S.E.I /三代目J Soul Brothers",
         "STAY TUNE/Suchmos",
@@ -167,6 +180,7 @@ export default {
         "WINDING ROAD/絢香×コブクロ",
         "YAH YAH YAH/CHAGE and ASKA",
         "愛をこめて花束を/SuperFly",
+        "愛を伝えたいだとか/あいみょん",
         "糸/中島みゆき",
         "打上花火/DAOKO",
         "カブトムシ/AIKO",
@@ -225,12 +239,10 @@ export default {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("ログイン状態.")
-        this.listen()
+        this.listen();
       } else {
-        console.log("ログインしていない状態")
       }
-    })
+    });
   },
 
   methods: {
@@ -241,44 +253,44 @@ export default {
         .database()
         .ref("loginuser/" + useruid + "/status")
         .on("value", snapshot => {
-          this.entrystatus = snapshot.val()
-        })
+          this.entrystatus = snapshot.val();
+        });
 
       firebase
         .database()
         .ref("loginuser/" + useruid + "/name")
         .on("value", snapshot => {
-          this.name = snapshot.val()
-        })
+          this.name = snapshot.val();
+        });
 
       firebase
         .database()
         .ref("loginuser/" + useruid + "/image")
         .on("value", snapshot => {
-          this.image = snapshot.val()
-        })
+          this.image = snapshot.val();
+        });
 
       firebase
         .database()
         .ref("entryBoard/")
         .on("value", snapshot => {
           if (snapshot) {
-            const srootList = snapshot.val()
+            const srootList = snapshot.val();
             let slist = [];
 
             Object.keys(srootList).forEach((val, key) => {
-              slist.push(srootList[val])
-            })
+              slist.push(srootList[val]);
+            });
 
             var flist = slist.sort(function(a, b) {
               if (a.sessionOrder > b.sessionOrder) return 1;
               if (a.sessionOrder < b.sessionOrder) return -1;
               return 0;
-            })
+            });
 
             var glist = flist.filter(function(element) {
               return element.sessionStatus == "coming";
-            })
+            });
 
             this.forjoinlist = glist;
             var bandlist = [];
@@ -286,11 +298,11 @@ export default {
 
             bandlist = glist.filter(function(element1) {
               return element1.stage === "Band";
-            })
+            });
 
             acolist = glist.filter(function(element2) {
               return element2.stage === "Aco";
-            })
+            });
 
             if (bandlist.length > acolist.length) {
               this.stageselecter = "Aco";
@@ -298,7 +310,7 @@ export default {
               this.stageselecter = "Band";
             }
           }
-        })
+        });
     },
 
     newEntry() {
@@ -307,15 +319,15 @@ export default {
         .ref("entryBoard/")
         .on("value", snapshot => {
           if (snapshot) {
-            const rootList = snapshot.val()
+            const rootList = snapshot.val();
             let list = [];
             Object.keys(rootList).forEach((val, key) => {
-              list.push(rootList[val])
-            })
+              list.push(rootList[val]);
+            });
 
             this.Entnum = list.length;
           }
-        })
+        });
 
       var useruid = firebase.auth().currentUser.uid;
       var artistname = this.name;
@@ -328,29 +340,29 @@ export default {
         .database()
         .ref("loginuser/" + useruid + "/played")
         .once("value", snapshot => {
-          played = snapshot.val()
-        })
+          played = snapshot.val();
+        });
 
       firebase
         .database()
         .ref("loginuser/" + useruid + "/image")
         .once("value", snapshot => {
-          image = snapshot.val()
-        })
+          image = snapshot.val();
+        });
 
       firebase
         .database()
         .ref("loginuser/" + useruid + "/name")
         .on("value", snapshot => {
-          artistname = snapshot.val()
-        })
+          artistname = snapshot.val();
+        });
 
       firebase
         .database()
         .ref("loginuser/" + useruid + "/pr")
         .on("value", snapshot => {
-          pr = snapshot.val()
-        })
+          pr = snapshot.val();
+        });
 
       var En = this.Entnum;
       var entryNumber = En + 1;
@@ -373,7 +385,7 @@ export default {
       ) {
         this.isButtonDisabled = false;
 
-        alert("全てを選択してください")
+        alert("全てを選択してください");
       } else {
         if (
           confirm(
@@ -411,7 +423,7 @@ export default {
               sessionOrder: 0,
               sessionStatus: "coming",
               pr: pr
-            })
+            });
 
           firebase
             .database()
@@ -420,16 +432,16 @@ export default {
               image: image,
               name: artistname,
               messege: selectedParts + ">" + selectedTunes + "をエントリー！"
-            })
+            });
 
           firebase
             .database()
             .ref("loginuser/" + useruid)
             .update({
               status: "now_entry"
-            })
+            });
 
-          alert("順番が確定するまでお待ちください！楽しんで！")
+          alert("順番が確定するまでお待ちください！楽しんで！");
           this.selectedTunes = null;
           this.selectedParts = null;
         }
@@ -448,8 +460,8 @@ export default {
         .database()
         .ref("loginuser/" + useruid + "/image")
         .once("value", snapshot => {
-          image = snapshot.val()
-        })
+          image = snapshot.val();
+        });
 
       var selper = 0;
 
@@ -458,27 +470,27 @@ export default {
         .ref("entryBoard/" + selectedsessionId)
         .on("value", snapshot => {
           if (snapshot) {
-            const rootList = snapshot.val()
+            const rootList = snapshot.val();
             let list = [];
 
             Object.keys(rootList).forEach((val, key) => {
-              var result = val.match(/player./)
+              var result = val.match(/player./);
 
               if (result != null) {
-                list.push(rootList[val])
+                list.push(rootList[val]);
               }
-            })
+            });
 
             selper = list.length;
           }
-        })
+        });
       var selp = selper + 1;
       var selplayernumbername = "player" + selp;
       var selplayernumberuid = "p_uid" + selp;
       if (selectedsession == null || selectedParts == null) {
         this.isButtonDisabled = false;
 
-        alert("すべてを選択してください")
+        alert("すべてを選択してください");
       } else {
         if (
           confirm(
@@ -494,7 +506,7 @@ export default {
             .update({
               [selplayernumbername]: selectedParts + "." + artistname,
               [selplayernumberuid]: useruid
-            })
+            });
 
           firebase
             .database()
@@ -504,9 +516,9 @@ export default {
               name: artistname,
               messege:
                 selectedsession + "に" + selectedParts + "でJOINしました！"
-            })
+            });
 
-          alert("順番が確定するまでお待ちください！楽しんで！")
+          alert("順番が確定するまでお待ちください！楽しんで！");
           this.selectedSession = null;
           this.selectedParts = null;
         }
@@ -519,7 +531,6 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss">
-@import "./node_modules/bulma/bulma.sass";
 #list {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
