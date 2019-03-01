@@ -1,161 +1,134 @@
 <template>
   <div class="top">
-    <div class="level-item has-text-centered">
-      <router-link to="/personchange">
-        <div>
-          <p class="heading">{{ name }}</p>
-          <div class="item-image">
-            <img :src="image" width="60" height="60">
+    <div class="container mx-auto px-4">
+      <div class="flex mb-4">
+        <div class="w-1/4">
+          <router-link to="/personchange">
+            <div>
+              <p class="heading">{{ name }}</p>
+              <div class="item-image">
+                <img :src="image" width="60" height="60">
+              </div>
+            </div>
+          </router-link>
+        </div>
+
+        <div class="w-1/4">
+          <router-link to="/list">
+            <p class="heading">楽曲エントリー</p>
+            <p class="title">
+              <i class="fas fa-play is-size-4"></i>
+            </p>
+          </router-link>
+        </div>
+
+        <div class="w-1/4">
+          <div>
+            <p class="heading">
+              <i class="far fa-thumbs-up">いいね！</i>
+            </p>
+            <transition mode="out-in" name="bounce">
+              <p class="title" v-if="show" :key="getapt">{{getapt}}</p>
+            </transition>
           </div>
         </div>
-      </router-link>
-    </div>
 
-    <div class="level-item has-text-centered">
-      <router-link to="/list">
-        <p class="heading">楽曲エントリー</p>
-        <p class="title">
-          <i class="fas fa-play is-size-4"></i>
-        </p>
-      </router-link>
-    </div>
-
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">
-          <i class="far fa-thumbs-up">いいね！</i>
-        </p>
-        <transition mode="out-in" name="bounce">
-          <p class="title" v-if="show" :key="getapt">{{getapt}}</p>
-        </transition>
-      </div>
-    </div>
-
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">残りポイント</p>
-        <p class="title">{{apt}}</p>
-      </div>
-    </div>
-
-    <div
-      style="height:300px; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
-    >
-      <li class="is-size-6" v-for="item in board" style="list-style: none;">
-        <a class="item-image" @click="isImageModalActive = true">
-          <img :src="item.image" width="40" height="40">
-        </a>
-        <B>{{item.name}} :</B>
-        <a v-html="item.messege">{{item.messege}}</a>
-      </li>
-    </div>
-
-    <div style="height:20px;"></div>
-
-    <multiselect
-      v-model="selected"
-      deselect-label="一人を選んでください。"
-      track-by="uid"
-      label="name"
-      placeholder="誰にいいねしますか？"
-      :options="options"
-      :searchable="true"
-      :allow-empty="false"
-      :show-labels="false"
-    ></multiselect>
-
-    <div style="height:20px;"></div>
-
-    <div class="columns is-mobile">
-      <!--      <div class="column">
-        <a
-          class="button is-danger is-rounded is-small"
-          v-bind:disabled="isButtonDisabled1"
-          @click="sendMessage"
-        >
-          <i class="far fa-thumbs-up">20</i>
-        </a>
-      </div>
-      <div class="column">
-        <a
-          class="button is-success is-rounded is-small"
-          v-bind:disabled="isButtonDisabled2"
-          @click="sendMessage2"
-        >
-          <i class="far fa-thumbs-up">10</i>
-        </a>
+        <div class="w-1/4">
+          <div>
+            <p class="heading">残りポイント</p>
+            <p class="title">{{apt}}</p>
+          </div>
+        </div>
       </div>
 
-      <div class="column">
-        <a
-          class="button is-outlined is-rounded is-small"
-          v-bind:disabled="isButtonDisabled3"
-          @click="sendMessage3"
-        >
-          <i class="far fa-thumbs-up">5</i>
-        </a>
-      </div>
-
-
-      -->
-      <div class="column">
-        <a
-          class="button is-danger is-large"
-          v-bind:disabled="isButtonDisabled4"
-          @click="sendMessage4"
-        >
-          <i class="far fa-thumbs-up is-size-2">いいね！</i>
-        </a>
-      </div>
-    </div>
-
-    <input class="input" type="text" placeholder="chat-いろんなコメントください!" v-model="messege">
-
-    <div style="height:10px;"></div>
-    <a class="button is-light" style="text-align: left;" @click="sendMessage5">送信</a>
-    <div style="height:20px;"></div>
-
-    <h6 class="is-size-7">
-      <B>
-        今日プレイした人たちに
-        <i class="far fa-thumbs-up"></i>やメッセージを！
-      </B>
-    </h6>
-    <div style="height:20px;"></div>
-
-    <h6 class="is-size-7">
-      <B>＜順番表＞</B>
-    </h6>
-    <div style="height:5px;"></div>
-    <ul>
-      <li
-        class="is-size-7"
-        v-for="item in flist"
-        style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+      <div
+        style="height:300px; width:100%; overflow-y:auto; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
       >
-        <a class="item-image">
-          <img :src="item.image" width="20" height="20">
-        </a>
-        <B>No.{{item.sessionOrder}}：</B>
-        {{item.entune}} {{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
-      </li>
-    </ul>
-    <h6 class="is-size-7">
-      <B>Now</B>
-    </h6>
-    <ul>
-      <li
-        class="is-size-7"
-        v-for="item in clist"
-        style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
-      >
-        <a class="item-image">
-          <img :src="item.image" width="20" height="20">
-        </a>
-        <B>No.{{item.sessionOrder}}：</B>
-        {{item.entune}} {{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
-      </li>
-    </ul>
+        <li class="text-base" v-for="item in board" style="list-style: none;">
+          <a class="item-image" @click="isImageModalActive = true">
+            <img :src="item.image" width="40" height="40">
+          </a>
+          <B>{{item.name}} :</B>
+          <a v-html="item.messege">{{item.messege}}</a>
+        </li>
+      </div>
+
+      <div style="height:20px;"></div>
+
+      <multiselect
+        v-model="selected"
+        deselect-label="一人を選んでください。"
+        track-by="uid"
+        label="name"
+        placeholder="誰にいいねしますか？"
+        :options="options"
+        :searchable="true"
+        :allow-empty="false"
+        :show-labels="false"
+      ></multiselect>
+
+      <div style="height:20px;"></div>
+
+      <div class="columns is-mobile">
+        <div class="column">
+          <a
+            class="button is-danger is-large"
+            v-bind:disabled="isButtonDisabled4"
+            @click="sendMessage4"
+          >
+            <i class="far fa-thumbs-up is-size-2">いいね！</i>
+          </a>
+        </div>
+      </div>
+
+      <input class="input" type="text" placeholder="chat-いろんなコメントください!" v-model="messege">
+
+      <div style="height:10px;"></div>
+      <a class="button is-light" style="text-align: left;" @click="sendMessage5">送信</a>
+      <div style="height:20px;"></div>
+
+      <h6 class="is-size-7">
+        <B>
+          今日プレイした人たちに
+          <i class="far fa-thumbs-up"></i>やメッセージを！
+        </B>
+      </h6>
+      <div style="height:20px;"></div>
+
+      <h6 class="is-size-7">
+        <B>＜順番表＞</B>
+      </h6>
+      <div style="height:5px;"></div>
+      <ul>
+        <li
+          class="is-size-7"
+          v-for="item in flist"
+          style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+        >
+          <a class="item-image">
+            <img :src="item.image" width="20" height="20">
+          </a>
+          <B>No.{{item.sessionOrder}}：</B>
+          {{item.entune}} {{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
+        </li>
+      </ul>
+      <h6 class="is-size-7">
+        <B>Now</B>
+      </h6>
+      <ul>
+        <li
+          class="is-size-7"
+          v-for="item in clist"
+          style="list-style: none; background-color:#FFFFFF; text-align:left; padding:10px; border-radius: 3px;"
+        >
+          <a class="item-image">
+            <img :src="item.image" width="20" height="20">
+          </a>
+          <B>No.{{item.sessionOrder}}：</B>
+          {{item.entune}} {{item.name}} {{item.stage}} {{item.player1}} {{item.player2}} {{item.player3}} {{item.player4}} {{item.player5}} {{item.player6}} {{item.player7}} {{item.player8}} {{item.player9}}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 

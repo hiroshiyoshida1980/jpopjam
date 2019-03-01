@@ -4,16 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
-import 'vue-croppa/dist/vue-croppa.css'
-import VueYoutube from 'vue-youtube'
-import Croppa from 'vue-croppa'
 import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-brands.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-regular.css'
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
-
-Vue.use(VueYoutube)
-Vue.use(Croppa)
 Vue.config.productionTip = false
 
 var config = {

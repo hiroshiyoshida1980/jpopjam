@@ -30,9 +30,9 @@
               <router-link to="/members">MEMBERS</router-link>
             </li>
             <li class="noanim">
-              <a href="./index.html">
+              <router-link to="/">
                 <img src="./img/Nav_Logo.png" alt>
-              </a>
+              </router-link>
             </li>
             <li>
               <router-link to="/access">ACCESS</router-link>
@@ -61,7 +61,8 @@
   </div>
 </template>
 <script>
-import firebase from "firebase";
+import firebase from "firebase"
+import '@/assets/styles/main.css'
 export default {
   name: "App",
   data: () => ({
@@ -78,7 +79,7 @@ export default {
 };
 </script>
 <style>
-body {
+#app {
   font-size: 14px;
   line-height: 1.6;
   font-weight: normal;
